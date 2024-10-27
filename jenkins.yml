@@ -1,17 +1,18 @@
-name: jenkins-identidock
+name: jenkins
 
-identidock:
-  build: .
-  expose:
-    - "9090:9090"
-  environment:
-    ENV: PROD
-  links:
-    - "dnmonster:dnmonster"
-    - "redis:redis"
-  
-dnmonster:
-  image: amouat/dnmonster:1.0
+services:
+  identidock:
+    build: .
+    expose:
+      - "9090"
+    environment:
+      ENV: PROD
+    links:
+      - dnmonster
+      - redis
+    
+  dnmonster:
+    image: amouat/dnmonster:1.0
 
-redis:
-  image: redis:3.0
+  redis:
+    image: redis:3.0
