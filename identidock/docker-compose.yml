@@ -1,0 +1,25 @@
+name: identidock
+
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+      - "9090:9090"
+      - "9191:9191"
+    environment:
+      ENV: DEV
+      PYTHONDONTWRITEBYTECODE: 1
+    volumes:
+      - type: bind
+        source: ./app/
+        target: /app
+    links:
+      - "dnmonster:dnmonster"
+      - "redis:redis"
+
+  dnmonster:
+    image: amouat/dnmonster:1.0
+
+  redis:
+    image: redis:3.0
