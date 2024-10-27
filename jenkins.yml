@@ -1,15 +1,15 @@
 name: jenkins
 
 services:
-  identidock:
+  server:
     build: .
     expose:
       - "9090"
     environment:
       ENV: PROD
     links:
-      - dnmonster
-      - redis
+      - "dnmonster:dnmonster"
+      - "redis:redis"
     
   dnmonster:
     image: amouat/dnmonster:1.0
